@@ -11,7 +11,7 @@
     >
       <i class="el-icon-upload" />
       <div class="el-upload__text">
-        Drag或<em>点击上传</em>
+        Drag or <em>Click here</em>
       </div>
     </el-upload>
     <div v-show="imageUrl.length>0" class="image-preview">

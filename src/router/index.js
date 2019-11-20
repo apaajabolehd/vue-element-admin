@@ -130,6 +130,49 @@ export const constantRoutes = [
  */
 export const asyncRoutes = [
   {
+    path: '/company',
+    component: Layout,
+    redirect: '/company/create',
+    name: 'Company',
+    meta: {
+      title: 'Company',
+      icon: 'user'
+    },
+    children: [
+      {
+        path: 'create',
+        component: () => import('@/views/company/create'),
+        name: 'CreateCompany',
+        meta: { title: 'Create Company' }
+      },
+      {
+        path: 'edit/:id(\\d+)',
+        component: () => import('@/views/company/edit'),
+        name: 'EditCompany',
+        meta: { title: 'Edit Company', noCache: true, activeMenu: '/company/edit' }
+        // hidden: true
+      }
+    ]
+  },
+  {
+    path: '/guest',
+    component: Layout,
+    redirect: 'guest/list',
+    name: 'Guest',
+    meta: {
+      title: 'Guest',
+      icon: 'peoples'
+    },
+    children: [
+      {
+        path: 'list',
+        component: () => import('@/views/guest/list'),
+        name: 'GuestList',
+        meta: { title: 'Guest List' }
+      }
+    ]
+  },
+  {
     path: '/permission',
     component: Layout,
     redirect: '/permission/page',
@@ -138,7 +181,7 @@ export const asyncRoutes = [
     meta: {
       title: 'Permission',
       icon: 'lock',
-      roles: ['admin', 'editor'] // you can set roles in root nav
+      roles: ['CAN_VIEW_COMPANY', 'CAN_ADD_COMPANY'] // you can set roles in root nav
     },
     children: [
       {
@@ -147,7 +190,7 @@ export const asyncRoutes = [
         name: 'PagePermission',
         meta: {
           title: 'Page Permission',
-          roles: ['admin'] // or you can only set roles in sub nav
+          roles: ['CAN_VIEW_COMPANY'] // or you can only set roles in sub nav
         }
       },
       {
@@ -165,7 +208,7 @@ export const asyncRoutes = [
         name: 'RolePermission',
         meta: {
           title: 'Role Permission',
-          roles: ['admin']
+          roles: ['CAN_VIEW_COMPANY']
         }
       }
     ]
